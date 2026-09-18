@@ -8,7 +8,23 @@
 </head>
 <body>
     <main class="page">
-        <article class="card">
+        <article class="card card--status-baru">
+            <picture class="card__cover">
+                <source
+                srcset="cover-large.webp"
+                media="(min-width: 768px)"
+                type="image/webp">
+
+                <source
+                srcset="cover-small.webp"
+                media="(max-width: 767px)"
+                type="image/webp">
+                <img
+                src="cover-fallback.jpg"
+                alt="Ilustrasi sampul materi cara membuat repository di Github"
+                class="card__cover-img"
+                loading="lazy">
+            </picture>
 
         </article>
     </main>
