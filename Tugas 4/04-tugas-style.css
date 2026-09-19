@@ -94,3 +94,38 @@ a {
         grid-template-areas: "sidebar main aside";
     }
 }
+
+.sidebar {
+    grid-area: sidebar;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    height: fit-content;
+}
+
+.sidebar__title {
+    font-size: 1.1rem;
+    margin-top: 0;
+    margin-bottom: 12px;
+    border-bottom: 2px solid #0b1f4d;
+    padding-bottom: 8px;
+}
+
+.sidebar__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar__list li {
+    margin-bottom: 10px;
+}
+
+.sidebar__list a {
+    color: #0b1f4d;
+}
+
+.sidebar__list a:hover {
+    text-decoration: underline;
+}
+
