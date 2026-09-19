@@ -46,3 +46,18 @@ a {
 .site-header__nav a:hover {
     text-decoration: underline;
 }
+
+/* Ponsel: bilah navigasi merapat vertikal */
+@media (max-width: 767px) {
+    .site-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .site-header__nav {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+}
