@@ -61,3 +61,36 @@ a {
         width: 100%;
     }
 }
+
+/* ============ LAYOUT UTAMA ============ */
+
+.layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "sidebar"
+        "main"
+        "aside";
+    gap: 20px;
+    padding: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Tablet: sidebar + main jadi 2 kolom, kolom kanan turun ke bawah penuh */
+@media (min-width: 768px) {
+    .layout {
+        grid-template-columns: 200px 1fr;
+        grid-template-areas:
+            "sidebar main"
+            "aside   aside";
+    }
+}
+
+/* Desktop: 3 kolom penuh sesuai spesifikasi */
+@media (min-width: 992px) {
+    .layout {
+        grid-template-columns: 200px 1fr 220px;
+        grid-template-areas: "sidebar main aside";
+    }
+}
