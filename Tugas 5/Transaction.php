@@ -51,3 +51,15 @@ class Transaction
  
         return $currentBalance - $this->amount;
     }
+        /**
+     * Representasi array untuk disimpan ke dalam session.
+     */
+    public function toArray(): array
+    {
+        return [
+            'id'     => $this->id,
+            'type'   => $this->type,
+            'amount' => $this->amount,
+        ];
+    }
+}
