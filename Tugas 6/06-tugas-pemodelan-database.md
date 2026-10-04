@@ -182,3 +182,52 @@ Tabel `Mahasiswa`, `Peminjaman`, dan `Detail_Peminjaman` tetap seperti pada taha
 | kode_buku | VARCHAR(10) | PRIMARY KEY (komposit), FOREIGN KEY → buku(kode_buku) |
  
 ---
+
+## 5. Diagram Relasi (ERD)
+ 
+```mermaid
+erDiagram
+    MAHASISWA ||--o{ PEMINJAMAN : melakukan
+    PEMINJAMAN ||--o{ DETAIL_PEMINJAMAN : mencakup
+    BUKU ||--o{ DETAIL_PEMINJAMAN : "dipinjam dalam"
+    PENERBIT ||--o{ BUKU : menerbitkan
+ 
+    MAHASISWA {
+        varchar nim PK
+        varchar nama_mahasiswa
+        varchar prodi
+        varchar no_hp
+    }
+ 
+    PENERBIT {
+        varchar id_penerbit PK
+        varchar nama_penerbit
+        varchar kota_penerbit
+    }
+ 
+    BUKU {
+        varchar kode_buku PK
+        varchar judul_buku
+        int tahun_terbit
+        int stok
+        varchar id_penerbit FK
+    }
+ 
+    PEMINJAMAN {
+        varchar id_peminjaman PK
+        varchar nim FK
+        date tanggal_pinjam
+        date tanggal_kembali
+        varchar status
+    }
+ 
+    DETAIL_PEMINJAMAN {
+        varchar id_peminjaman PK, FK
+        varchar kode_buku PK, FK
+    }
+```
+ 
+**Penjelasan relasi:**
+- Satu **Mahasiswa** dapat melakukan banyak **Peminjaman** (one-to-many).
+- Satu **Peminjaman** dapat mencakup banyak **Buku** lewat tabel penghubung **Detail_Peminjaman** (many-to-many antara Peminjaman dan Buku).
+- Satu **Penerbit** dapat menerbitkan banyak **Buku** (one-to-many).
