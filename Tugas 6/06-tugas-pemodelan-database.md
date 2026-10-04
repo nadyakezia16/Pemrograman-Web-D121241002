@@ -118,3 +118,25 @@ Hilangkan partial dependency dengan memecah tabel berdasarkan atribut mana yang 
  
 ---
  
+ ### 3.4 Third Normal Form (3NF)
+ 
+Hilangkan transitive dependency dengan memisahkan entitas Penerbit dari Buku.
+ 
+**Tabel Penerbit**
+| id_penerbit | nama_penerbit | kota_penerbit |
+|---|---|---|
+| PB01 | Penerbit Informatika | Bandung |
+| PB02 | Penerbit Andi | Yogyakarta |
+ 
+**Tabel Buku**
+| kode_buku | judul_buku | id_penerbit |
+|---|---|---|
+| BK001 | Pemrograman Web | PB01 |
+| BK005 | Basis Data Lanjut | PB02 |
+ 
+Tabel `Mahasiswa`, `Peminjaman`, dan `Detail_Peminjaman` tetap seperti pada tahap 2NF karena tidak memiliki transitive dependency.
+ 
+**Hasil akhir: seluruh tabel sudah memenuhi syarat 3NF** — setiap atribut non-kunci bergantung penuh dan hanya pada primary key tabelnya masing-masing, tidak ada partial dependency maupun transitive dependency.
+ 
+---
+ 
