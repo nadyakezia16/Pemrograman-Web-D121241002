@@ -84,3 +84,37 @@ Pecah atribut multivalue sehingga setiap sel hanya berisi satu nilai atomik (sat
 **Sudah 1NF**, tapi kunci komposit tabel ini adalah `(id_transaksi, kode_buku)`. Masalahnya: `nama_mahasiswa` dan `prodi` hanya bergantung pada `nim` (bagian dari kunci), bukan pada kunci komposit penuh → **partial dependency**, melanggar syarat 2NF.
  
 ---
+
+### 3.3 Second Normal Form (2NF)
+ 
+Hilangkan partial dependency dengan memecah tabel berdasarkan atribut mana yang benar-benar bergantung pada bagian kunci mana.
+ 
+**Tabel Mahasiswa** (nama_mahasiswa, prodi bergantung penuh pada nim)
+| nim | nama_mahasiswa | prodi |
+|---|---|---|
+| D121001 | Rian Saputra | Informatika |
+| D121002 | Nurul Amalia | Sistem Informasi |
+ 
+**Tabel Buku_Penerbit** (judul_buku, nama_penerbit, kota_penerbit bergantung penuh pada kode_buku)
+| kode_buku | judul_buku | nama_penerbit | kota_penerbit |
+|---|---|---|---|
+| BK001 | Pemrograman Web | Penerbit Informatika | Bandung |
+| BK005 | Basis Data Lanjut | Penerbit Andi | Yogyakarta |
+ 
+**Tabel Peminjaman** (tanggal_pinjam, tanggal_kembali bergantung pada id_transaksi)
+| id_transaksi | nim | tanggal_pinjam | tanggal_kembali |
+|---|---|---|---|
+| TR001 | D121001 | 2026-09-01 | 2026-09-10 |
+| TR002 | D121002 | 2026-09-03 | 2026-09-12 |
+ 
+**Tabel Detail_Peminjaman** (kunci komposit, penghubung Peminjaman ↔ Buku)
+| id_transaksi | kode_buku |
+|---|---|
+| TR001 | BK001 |
+| TR001 | BK005 |
+| TR002 | BK001 |
+ 
+**Sudah 2NF**, tapi tabel `Buku_Penerbit` masih punya masalah: `nama_penerbit` dan `kota_penerbit` sebenarnya bergantung pada identitas penerbit (bukan langsung pada `kode_buku`) → **transitive dependency** (`kode_buku` → `id_penerbit` → `nama_penerbit`, `kota_penerbit`), melanggar syarat 3NF.
+ 
+---
+ 
