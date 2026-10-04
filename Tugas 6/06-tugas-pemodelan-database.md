@@ -140,3 +140,45 @@ Tabel `Mahasiswa`, `Peminjaman`, dan `Detail_Peminjaman` tetap seperti pada taha
  
 ---
  
+ ## 4. Rancangan Tabel Akhir (3NF)
+ 
+### Tabel `mahasiswa`
+| Kolom | Tipe Data | Keterangan |
+|---|---|---|
+| nim | VARCHAR(10) | PRIMARY KEY |
+| nama_mahasiswa | VARCHAR(100) | NOT NULL |
+| prodi | VARCHAR(50) | NOT NULL |
+| no_hp | VARCHAR(15) | NULL |
+ 
+### Tabel `penerbit`
+| Kolom | Tipe Data | Keterangan |
+|---|---|---|
+| id_penerbit | VARCHAR(5) | PRIMARY KEY |
+| nama_penerbit | VARCHAR(100) | NOT NULL |
+| kota_penerbit | VARCHAR(50) | NULL |
+ 
+### Tabel `buku`
+| Kolom | Tipe Data | Keterangan |
+|---|---|---|
+| kode_buku | VARCHAR(10) | PRIMARY KEY |
+| judul_buku | VARCHAR(150) | NOT NULL |
+| tahun_terbit | YEAR | NULL |
+| stok | INT | NOT NULL DEFAULT 0 |
+| id_penerbit | VARCHAR(5) | FOREIGN KEY → penerbit(id_penerbit) |
+ 
+### Tabel `peminjaman`
+| Kolom | Tipe Data | Keterangan |
+|---|---|---|
+| id_peminjaman | VARCHAR(10) | PRIMARY KEY |
+| nim | VARCHAR(10) | FOREIGN KEY → mahasiswa(nim) |
+| tanggal_pinjam | DATE | NOT NULL |
+| tanggal_kembali | DATE | NULL |
+| status | ENUM('dipinjam','dikembalikan','terlambat') | NOT NULL DEFAULT 'dipinjam' |
+ 
+### Tabel `detail_peminjaman`
+| Kolom | Tipe Data | Keterangan |
+|---|---|---|
+| id_peminjaman | VARCHAR(10) | PRIMARY KEY (komposit), FOREIGN KEY → peminjaman(id_peminjaman) |
+| kode_buku | VARCHAR(10) | PRIMARY KEY (komposit), FOREIGN KEY → buku(kode_buku) |
+ 
+---
