@@ -55,3 +55,32 @@ Karena satu transaksi peminjaman bisa mencakup lebih dari satu buku, relasi Pemi
 | **kode_buku** | Primary Key (komposit), Foreign Key → Buku |
  
 ---
+
+## 3. Simulasi Normalisasi
+ 
+### 3.1 Unnormalized Form (UNF)
+ 
+Data mentah awal masih berupa satu tabel datar dengan atribut **multivalue** (satu transaksi bisa memuat beberapa buku sekaligus dalam satu sel).
+ 
+| id_transaksi | nim | nama_mahasiswa | prodi | kode_buku | judul_buku | nama_penerbit | kota_penerbit | tanggal_pinjam | tanggal_kembali |
+|---|---|---|---|---|---|---|---|---|---|
+| TR001 | D121001 | Rian Saputra | Informatika | BK001, BK005 | Pemrograman Web, Basis Data Lanjut | Penerbit Informatika, Penerbit Andi | Bandung, Yogyakarta | 2026-09-01 | 2026-09-10 |
+| TR002 | D121002 | Nurul Amalia | Sistem Informasi | BK001 | Pemrograman Web | Penerbit Informatika | Bandung | 2026-09-03 | 2026-09-12 |
+ 
+**Masalah**: kolom `kode_buku`, `judul_buku`, `nama_penerbit`, dan `kota_penerbit` berisi lebih dari satu nilai dalam satu sel (bukan nilai atomik) → melanggar syarat 1NF.
+ 
+---
+ 
+### 3.2 First Normal Form (1NF)
+ 
+Pecah atribut multivalue sehingga setiap sel hanya berisi satu nilai atomik (satu baris per buku yang dipinjam).
+ 
+| id_transaksi | nim | nama_mahasiswa | prodi | kode_buku | judul_buku | nama_penerbit | kota_penerbit | tanggal_pinjam | tanggal_kembali |
+|---|---|---|---|---|---|---|---|---|---|
+| TR001 | D121001 | Rian Saputra | Informatika | BK001 | Pemrograman Web | Penerbit Informatika | Bandung | 2026-09-01 | 2026-09-10 |
+| TR001 | D121001 | Rian Saputra | Informatika | BK005 | Basis Data Lanjut | Penerbit Andi | Yogyakarta | 2026-09-01 | 2026-09-10 |
+| TR002 | D121002 | Nurul Amalia | Sistem Informasi | BK001 | Pemrograman Web | Penerbit Informatika | Bandung | 2026-09-03 | 2026-09-12 |
+ 
+**Sudah 1NF**, tapi kunci komposit tabel ini adalah `(id_transaksi, kode_buku)`. Masalahnya: `nama_mahasiswa` dan `prodi` hanya bergantung pada `nim` (bagian dari kunci), bukan pada kunci komposit penuh → **partial dependency**, melanggar syarat 2NF.
+ 
+---
