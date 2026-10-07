@@ -65,6 +65,7 @@ if (empty($errors)) {
 }
 
 $daftarPesan = $guestBook->ambilSemuaPesan();
+?>
 
 <!DOCTYPE html>
 <html lang="id">
