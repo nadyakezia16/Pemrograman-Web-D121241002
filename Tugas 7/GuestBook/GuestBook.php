@@ -23,3 +23,15 @@ class GuestBook
             ':pesan' => $pesan,
         ]);
     }
+    /**
+ * Mengambil seluruh pesan, diurutkan dari yang terbaru.
+ */
+public function ambilSemuaPesan(): array
+{
+    $sql = 'SELECT id, nama, email, pesan, tanggal_kirim FROM buku_tamu ORDER BY tanggal_kirim DESC';
+
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
