@@ -29,3 +29,27 @@ $guestBook = new GuestBook($pdo);
 
 $errors = [];
 $successMessage = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $postToken = $_POST['csrf_token'] ?? '';
+    if (!hash_equals($_SESSION['csrf_token'], $postToken)) {
+        die('Kesalahan Keamanan: Token CSRF tidak cocok.');
+    }
+
+    $nama  = trim($_POST['nama'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $pesan = trim($_POST['pesan'] ?? '');
+
+    if (empty($nama)) {
+        $errors[] = 'Nama tidak boleh kosong.';
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = 'Format alamat email tidak valid.';
+    }
+
+    if (mb_strlen($pesan) < 5) {
+        $errors[] = 'Pesan harus terdiri dari minimal lima karakter.';
+    }
+}
