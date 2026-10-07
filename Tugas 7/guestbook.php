@@ -53,3 +53,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Pesan harus terdiri dari minimal lima karakter.';
     }
 }
+
+if (empty($errors)) {
+    if ($guestBook->simpanPesan($nama, $email, $pesan)) {
+        $successMessage = 'Terima kasih, ' . $nama . '! Pesan Anda berhasil dikirim.';
+
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    } else {
+        $errors[] = 'Gagal menyimpan pesan, silakan coba lagi.';
+    }
+}
+
+$daftarPesan = $guestBook->ambilSemuaPesan();
