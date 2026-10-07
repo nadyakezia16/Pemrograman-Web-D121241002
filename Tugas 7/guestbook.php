@@ -123,6 +123,41 @@ $daftarPesan = $guestBook->ambilSemuaPesan();
 
             </div>
         </div>
+        <?php if (!empty($daftarPesan)): ?>
+    <div class="card mt-4 shadow-sm">
+        <div class="card-header bg-secondary text-white">
+            <h2 class="h5 mb-0">Daftar Pesan (<?= count($daftarPesan) ?>)</h2>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped align-middle">
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Email</th>
+                            <th>Pesan</th>
+                            <th>Tanggal Kirim</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($daftarPesan as $p): ?>
+                            <tr>
+                                <td><?= htmlspecialchars((string) $p['nama']) ?></td>
+                                <td><?= htmlspecialchars((string) $p['email']) ?></td>
+                                <td><?= htmlspecialchars((string) $p['pesan']) ?></td>
+                                <td><?= htmlspecialchars((string) $p['tanggal_kirim']) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<?php else: ?>
+    <div class="alert alert-light border mt-4 text-center text-muted">
+        Belum ada pesan. Jadilah yang pertama menulis di buku tamu!
+    </div>
+<?php endif; ?>
 
     </div>
 
